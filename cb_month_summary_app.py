@@ -26,8 +26,9 @@ if atlantis_file and gmi_file:
     if df1 is not None and df2 is not None:
         df1.columns = df1.columns.str.strip()
         df2.columns = df2.columns.str.strip()
+        df2 = df2[df2['TGIVIO'] == 'GO']
 
-        df1 = df1[df1['RecordType'] == 'TP']
+        df1 = df1[df1['RecordType'] == 'TR']
 
         df1 = df1.rename(columns={
             'ExchangeEBCode': 'CB',
@@ -40,6 +41,7 @@ if atlantis_file and gmi_file:
         
         # Normalize GMI column names to lowercase and strip spaces
         df2.columns = df2.columns.str.strip().str.lower()
+        df2 = df2[df2['TGIVIO'] == 'GO']
         col_map = {col: orig for col, orig in zip(df2.columns, df2.columns)}
 
         if 'acct' in col_map:
